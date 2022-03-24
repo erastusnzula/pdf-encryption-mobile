@@ -1,0 +1,68 @@
+MainWidget:
+<MainWidget>:
+    password : password_input.text
+    file_selected_label : file_selected_label
+    label_title : label_title
+    popup_button : popup_button
+    settings_button : settings_button
+    encrypt_button : encrypt_button
+    exit_button : exit_button
+    width_size : self.width
+    encrypted_file_label: encrypted_file_label
+    orientation: 'vertical'
+    Label:
+        id: label_title
+        canvas.before:
+            Color:
+                rgb: 0.2,.5,.5
+            Rectangle:
+                size: self.size
+                pos : self.pos
+        size_hint: 1,.2
+        text : 'PDF ENCRYPTION'
+        font_name: 'Sackers-Gothic-Std-Light.ttf'
+        font_size: dp(20)
+    BoxLayout:
+        size_hint: 1,.5
+        Button:
+            id : popup_button
+            text : 'Select file'
+            on_release: root.show_select_file_popup()
+        Button:
+            id: settings_button
+            text: 'Settings'
+            on_release:
+                app.open_settings()
+
+    Label:
+        id: file_selected_label
+        canvas.before:
+            Color:
+                rgb: 0.2,.5,.5
+            Rectangle:
+                size: self.size
+                pos : self.pos
+        text: "<No file selected>"
+    TextInput:
+        id : password_input
+        hint_text: 'Enter password'
+        password: True
+    BoxLayout:
+        Button:
+            id : encrypt_button
+            text : 'Encrypt'
+            on_release: root.encrypt_file()
+        Button:
+            id : exit_button
+            text : 'Exit'
+            on_release: exit()
+
+    Label:
+        id: encrypted_file_label
+        canvas.before:
+            Color:
+                rgb: 0.2,.5,.5
+            Rectangle:
+                size: self.size
+                pos : self.pos
+        text: "Files encrypted : 0"
