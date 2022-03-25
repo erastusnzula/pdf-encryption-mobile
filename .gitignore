@@ -2,3 +2,10 @@
 __pycache__
 *.txt
 *.ini
+bin
+adb.exe
+AdbWinUsbApi.dll
+AdbWinApi.dll
+buildozer.spec
+.buildozer
+encryptfiles.ini

@@ -20,19 +20,21 @@ MainWidget:
             Rectangle:
                 size: self.size
                 pos : self.pos
-        size_hint: 1,.3
+        size_hint: 1,.5
         text : 'PDF ENCRYPTION'
         font_name: 'Sackers-Gothic-Std-Light.ttf'
-        font_size: dp(20)
+        font_size: dp(25)
     BoxLayout:
         size_hint: 1,.5
         Button:
             id : popup_button
             text : 'Select file'
             on_release: root.show_select_file_popup()
+            font_size: dp(25)
         Button:
             id: settings_button
             text: 'Settings'
+            font_size: dp(25)
             on_release:
                 app.open_settings()
 
@@ -45,19 +47,23 @@ MainWidget:
                 size: self.size
                 pos : self.pos
         text: "<No file selected>"
+        font_size: dp(25)
     TextInput:
         id : password_input
         hint_text: 'Enter password'
         password: True
+        font_size: dp(25)
     BoxLayout:
         Button:
             id : encrypt_button
             text : 'Encrypt'
             on_release: root.encrypt_file(self)
+            font_size: dp(25)
         Button:
             id : exit_button
             text : 'Exit'
             on_release: exit()
+            font_size: dp(25)
 
     Label:
         id: encrypted_file_label
@@ -68,8 +74,10 @@ MainWidget:
                 size: self.size
                 pos : self.pos
         text: "Files encrypted : 0"
+        font_size: dp(25)
     Button:
         id : view_encrypted_files_button
         text: 'View Encrypted Files'
         size_hint: 1,.5
         on_release : root.view_encrypted_files()
+        font_size: dp(25)

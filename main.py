@@ -9,6 +9,7 @@ from kivy.uix.button import Button
 from kivy.uix.filechooser import FileChooserListView
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.utils import platform
 
 from pdf_settings import settings_json
 
@@ -71,8 +72,14 @@ class MainWidget(BoxLayout):
                 i.color = 0, 0, 0
 
     def show_select_file_popup(self):
-        show = FileChooserListView(filters=['*.pdf', ''])
-        self.popup = Popup(title="Select File", content=show, size_hint=(None, None), size=(self.width, self.height))
+        path = "/"
+        if platform == "android":
+            from android.permissions import request_permissions, Permission
+            request_permissions([Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
+            path = "/storage/emulated/0"
+
+        show = FileChooserListView(filters=['*.pdf', ''], rootpath=path)
+        self.popup = Popup(title="Select File", content=show)
         self.popup.open()
         show.on_submit = self.get_file_selected
 
@@ -133,7 +140,7 @@ class MainWidget(BoxLayout):
         box.add_widget(close_button)
         self.popup = Popup(title=title,
                            content=box,
-                           size_hint=(None, None), size=(300, 250))
+                           )
         self.popup.open()
 
     def store_encrypted_file(self, filename):
@@ -158,7 +165,7 @@ class MainWidget(BoxLayout):
                 box.add_widget(btn)
                 self.popup = Popup(title='Encrypted Files',
                                    content=box,
-                                   size_hint=(None, None), size=(300, 500))
+                                   )
                 self.popup.open()
         except FileNotFoundError:
             self.error_popup('Encrypted files', 'No stored encrypted files.')
