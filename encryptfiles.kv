@@ -1,6 +1,7 @@
 MainWidget:
 <MainWidget>:
     password : password_input.text
+    password_input : password_input
     file_selected_label : file_selected_label
     label_title : label_title
     popup_button : popup_button
@@ -9,6 +10,7 @@ MainWidget:
     exit_button : exit_button
     width_size : self.width
     encrypted_file_label: encrypted_file_label
+    view_encrypted_files_button : view_encrypted_files_button
     orientation: 'vertical'
     Label:
         id: label_title
@@ -18,7 +20,7 @@ MainWidget:
             Rectangle:
                 size: self.size
                 pos : self.pos
-        size_hint: 1,.2
+        size_hint: 1,.3
         text : 'PDF ENCRYPTION'
         font_name: 'Sackers-Gothic-Std-Light.ttf'
         font_size: dp(20)
@@ -51,7 +53,7 @@ MainWidget:
         Button:
             id : encrypt_button
             text : 'Encrypt'
-            on_release: root.encrypt_file()
+            on_release: root.encrypt_file(self)
         Button:
             id : exit_button
             text : 'Exit'
@@ -66,3 +68,8 @@ MainWidget:
                 size: self.size
                 pos : self.pos
         text: "Files encrypted : 0"
+    Button:
+        id : view_encrypted_files_button
+        text: 'View Encrypted Files'
+        size_hint: 1,.5
+        on_release : root.view_encrypted_files()
